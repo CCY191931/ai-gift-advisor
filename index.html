@@ -593,7 +593,7 @@
         // 每一輪都送 chatHistory 給 Gemini
         const prompt = buildPrompt(chatHistory);
         try {
-            const res = await fetch('http://localhost:3001/api/gemini', {
+            const res = await fetch('https://ai-gift-advisor-api.onrender.com/api/gemini', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ messages: [prompt] })
