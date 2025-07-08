@@ -1,4 +1,4 @@
-# gemini_proxy.py 的「除錯版本」
+# gemini_proxy.py 的「最終偵錯版」
 
 import os
 import traceback
@@ -8,7 +8,6 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
-
 app = Flask(__name__)
 
 origins_list = [
@@ -30,23 +29,32 @@ except Exception as e:
     print(f"FATAL: 初始化 Gemini 模型時發生錯誤 - {e}")
     traceback.print_exc()
 
+
+# ★★★ 新增的偵錯專用 API 路由 ★★★
+@app.route('/api/debug-key', methods=['GET'])
+def debug_key():
+    print("正在執行 /api/debug-key 路由...")
+    key_to_check = os.environ.get("GEMINI_API_KEY", "未設定 (Not Set)")
+    
+    if len(key_to_check) > 10:
+        response_data = {
+            "message": "成功讀取到環境變數",
+            "key_head": key_to_check[:5] + "...",
+            "key_tail": "..." + key_to_check[-5:],
+            "key_length": len(key_to_check)
+        }
+    else:
+        response_data = {
+            "message": "讀取到的環境變數有問題",
+            "key_value": key_to_check
+        }
+    
+    print(f"偵錯路由回傳的資料: {response_data}")
+    return jsonify(response_data)
+
+
 @app.route('/api/gemini', methods=['POST'])
 def handle_gemini_request():
-    # ★★★ 新增的除錯區塊 ★★★
-    print("--- 開始除錯 API Key ---")
-    try:
-        debug_api_key = os.environ.get("GEMINI_API_KEY", "未設定 (Not Set)")
-        if len(debug_api_key) > 10:
-            print(f"讀取到的 API Key (頭5碼): {debug_api_key[:5]}...")
-            print(f"讀取到的 API Key (末5碼): ...{debug_api_key[-5:]}")
-            print(f"金鑰總長度: {len(debug_api_key)}")
-        else:
-            print(f"讀取到的 API Key: {debug_api_key}")
-    except Exception as e:
-        print(f"在請求中讀取 API Key 時發生錯誤: {e}")
-    print("--- 除錯結束 ---")
-    # ★★★ 除錯區塊結束 ★★★
-    
     if not model:
         return jsonify({"error": "Gemini 模型未成功初始化，請檢查伺服器啟動日誌。"}), 500
     
