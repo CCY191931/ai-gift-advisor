@@ -4,7 +4,7 @@
 import os
 import traceback
 from flask import Flask, request, jsonify
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS  # <--- 我們需要保留這一個！
 import google.generativeai as genai
 from dotenv import load_dotenv
 
