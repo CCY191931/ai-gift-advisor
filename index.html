@@ -556,7 +556,7 @@
 
         const prompt = buildPrompt(chatHistory);
         try {
-            const res = await fetch('https://ai-gift-advisor-api.onrender.com/api/gemini', {
+            const res = await fetch('https://ai-gift-advisor.onrender.com/api/gemini', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ messages: [prompt] })
