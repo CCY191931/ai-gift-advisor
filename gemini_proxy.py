@@ -46,7 +46,6 @@ except Exception as e:
 
 # 6. 建立 API 路由 (Endpoint)
 @app.route('/api/gemini', methods=['POST'])
-@cross_origin(origins=["https://ai-gift-advisor-web.onrender.com"])
 def handle_gemini_request():
     # 檢查模型是否成功初始化
     if not model:
