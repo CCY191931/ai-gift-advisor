@@ -1,5 +1,7 @@
 import traceback
 from flask_cors import CORS
+app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "https://ai-gift-advisor-web.onrender.com"}})
 from flask import Flask, request, jsonify
 import requests
 from flask_cors import CORS 
