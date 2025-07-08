@@ -1,7 +1,11 @@
+from flask import Flask
 import traceback
 from flask_cors import CORS
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "https://ai-gift-advisor-web.onrender.com"}})
+CORS(app, resources={r"/api/*": {"origins": 
+                      "https://ai-gift-advisor-web.onrender.com",  # 您線上的前端
+                      "http://127.0.0.1:5500",                   # 您本地 VS Code Live Server 常用的網址
+                      "http://localhost:8080"} }                     # 您這次錯誤訊息中顯示的本地網址})
 from flask import Flask, request, jsonify
 import requests
 from flask_cors import CORS 
