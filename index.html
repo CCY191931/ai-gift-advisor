@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 禮物命運選品師 (Gemini Demo)</title>
     <style>
-        /* ★★★ 關鍵修正：補上這一塊 ★★★ */
         html {
             height: 100%;
         }
@@ -266,12 +265,12 @@
             text-align: center;
             display: flex;
             align-items: center;
-            padding: 12px 0; /* 上下12px, 左右0 */
+            padding: 12px 0;
             border-top: 1px solid #3a2a5e;
             background: rgba(30, 22, 54, 0.95);
         }
         #message-input {
-            flex-grow: 1; /* 自動填滿剩餘空間 */
+            flex-grow: 1;
             border: 1px solid #a044ff;
             border-radius: 20px;
             padding: 12px 18px;
@@ -373,29 +372,6 @@
             margin-bottom: 0 !important;
             margin-top: 0 !important;
         }
-        @media (max-width: 900px) {
-            .main-flex {
-                flex-direction: column;
-                gap: 0;
-                height: auto;
-                min-height: 100vh;
-            }
-            .crystal-ball-panel, .chat-container {
-                margin: 16px auto;
-                width: 98vw;
-                max-width: 98vw;
-                height: auto;
-                min-height: unset;
-                max-height: unset;
-            }
-            .chat-container {
-                flex: 1 1 auto;
-                min-height: 320px;
-            }
-            .messages {
-                min-height: 180px;
-            }
-        }
         .chat-footer {
             width: 100%;
             text-align: center;
@@ -411,12 +387,6 @@
             margin-top: 0;
             z-index: 2;
         }
-        @media (max-width: 900px) {
-            .chat-footer {
-                font-size: 0.92em;
-                padding: 8px 0 6px 0;
-            }
-        }
         .gift-item {
           color: #ffe066;
           font-weight: bold;
@@ -430,6 +400,37 @@
           display: block;
           margin-bottom: 10px;
           white-space: pre-line;
+        }
+        
+        /* ★★★ RWD 手機版面修正 ★★★ */
+        @media (max-width: 900px) {
+            .main-flex {
+                flex-direction: column;
+                gap: 0;
+                height: 100%;
+            }
+            .crystal-ball-panel {
+                display: none;
+            }
+            .chat-container {
+                flex: 1 1 auto;
+                width: 100%;
+                max-width: 100%;
+                height: 100%;
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .messages {
+                padding-top: 12px;
+            }
+            .chat-header, .chat-footer {
+                border-radius: 0;
+            }
+            .chat-footer {
+                font-size: 0.92em;
+                padding: 8px 0 6px 0;
+            }
         }
     </style>
 </head>
