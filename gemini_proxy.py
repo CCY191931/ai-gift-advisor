@@ -2,10 +2,15 @@ from flask import Flask
 import traceback
 from flask_cors import CORS
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": 
-                      "https://ai-gift-advisor-web.onrender.com",  # 您線上的前端
-                      "http://127.0.0.1:5500",                   # 您本地 VS Code Live Server 常用的網址
-                      "http://localhost:8080"} }                     # 您這次錯誤訊息中顯示的本地網址})
+# 1. 定義一個包含所有允許網址的列表
+origins_list = [
+    "https://ai-gift-advisor-web.onrender.com",
+    "http://127.0.0.1:5500",
+    "http://localhost:8080"
+]
+
+# 2. 將列表傳入CORS設定，並確保所有括號都已正確關閉
+CORS(app, resources={r"/api/*": {"origins": origins_list}})                 # 您這次錯誤訊息中顯示的本地網址})
 from flask import Flask, request, jsonify
 import requests
 from flask_cors import CORS 
